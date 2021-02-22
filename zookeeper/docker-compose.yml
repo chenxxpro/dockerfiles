@@ -9,11 +9,12 @@ services:
       - "/data/zookeeper/data:/data"
       - "/data/zookeeper/datalog:/datalog"
       - "/data/zookeeper/log:/log"
-    network_mode: "host"
-    # ports:
-    #   - 2181:2181
-    #   - 2888:2888
-    #   - 3888:3888
+    # 注意：如果改非standalone的集群部署模式，须外连访问其它服务，用Host网络
+    # network_mode: "host"
+    ports:
+      - 2181:2181 #对client提供服务
+      # - 2888:2888 #选举leader
+      # - 3888:3888 #集群内部通讯
     environment:
       ZOO_MY_ID: 1
       ZOO_MAX_CLIENT_CNXNS: 1000
