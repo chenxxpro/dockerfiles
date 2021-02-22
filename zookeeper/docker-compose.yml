@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  zookeeper:
+    image: zookeeper:3.4
+    restart: always
+    hostname: zookeeper
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+    volumes:
+      - "/data/zookeeper/data:/data"
+      - "/data/zookeeper/datalog:/datalog"
+      - "/data/zookeeper/log:/log"
+    network_mode: "host"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_MAX_CLIENT_CNXNS: 1000
+      ZOO_AUTOPURGE_SNAPRETAINCOUNT: 20
+      ZOO_AUTOPURGE_PURGEINTERVAL: 48
+      # 集群配置，当前仅部署单机
+      #ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
