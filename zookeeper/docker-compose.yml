@@ -1,19 +1,19 @@
-version: '3.1'
+version: "3.1"
 
 services:
   zookeeper:
     image: zookeeper:3.4
     restart: always
     hostname: zookeeper
-    ports:
-      - 2181:2181
-      - 2888:2888
-      - 3888:3888
     volumes:
       - "/data/zookeeper/data:/data"
       - "/data/zookeeper/datalog:/datalog"
       - "/data/zookeeper/log:/log"
     network_mode: "host"
+    # ports:
+    #   - 2181:2181
+    #   - 2888:2888
+    #   - 3888:3888
     environment:
       ZOO_MY_ID: 1
       ZOO_MAX_CLIENT_CNXNS: 1000
