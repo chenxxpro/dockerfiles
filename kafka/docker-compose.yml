@@ -4,6 +4,8 @@ services:
     #使用公版镜像
     image: wurstmeister/kafka:2.12-2.3.1
     restart: always
+    hostname: kafka
+    container_name: kafka
     # 通过宿主机访问ZK
     network_mode: host
     # ports:
