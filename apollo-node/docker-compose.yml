@@ -1,0 +1,34 @@
+version: '3.1'
+
+services:
+  config:
+    image: apolloconfig/apollo-configservice:1.8.1
+    restart: always
+    hostname: apolloconfig
+    volumes:
+      - "/tmp/logs:/opt/logs"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8"
+    env_file: 
+     - .secret/mysql.env
+    # 通过宿主机访问数据库
+    network_mode: "host"
+    # ports: 
+    #  - 8080:8080
+
+  admin:
+    image: apolloconfig/apollo-adminservice:1.8.1
+    restart: always
+    hostname: apolloadmin
+    volumes:
+      - "/tmp/logs:/opt/logs"
+    env_file: 
+     - .secret/mysql.env
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8"
+    # 通过宿主机访问数据库
+    network_mode: "host"
+    # ports: 
+    #   - 8090:8090
+    depends_on: 
+      - config
