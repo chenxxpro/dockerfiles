@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+  config_service:
+    image: apolloconfig/apollo-configservice:1.8.1
+    restart: always
+    hostname: apolloconfig
+    volumes:
+      - "/tmp/logs:/opt/logs"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "ChunM!anNoJueXia0"
+    network_mode: "host"
+
+  config_admin:
+    image: apolloconfig/apollo-adminservice:1.8.1
+    restart: always
+    hostname: apolloadmin
+    volumes:
+      - "/tmp/logs:/opt/logs"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "ChunM!anNoJueXia0"
+    network_mode: "host"
+
+  config_admin:
+    image: apolloconfig/apollo-adminservice:1.8.1
+    restart: always
+    hostname: apolloadmin
+    volumes:
+      - "/tmp/logs:/opt/logs"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "ChunM!anNoJueXia0"
+      APOLLO_PORTAL_ENVS: dev
+    network_mode: "host"
