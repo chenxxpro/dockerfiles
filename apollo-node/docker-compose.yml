@@ -5,6 +5,7 @@ services:
     image: apolloconfig/apollo-configservice:1.8.1
     restart: always
     hostname: apolloconfig
+    container_name: apolloconfig
     volumes:
       - "/tmp/logs:/opt/logs"
     environment:
@@ -19,7 +20,8 @@ services:
   admin:
     image: apolloconfig/apollo-adminservice:1.8.1
     restart: always
-    hostname: apolloadmin
+    hostname: apollo-admin
+    container_name: apollo-admin
     volumes:
       - "/tmp/logs:/opt/logs"
     env_file: 

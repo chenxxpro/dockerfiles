@@ -4,7 +4,8 @@ services:
   portal:
     image: apolloconfig/apollo-portal:1.8.1
     restart: always
-    hostname: apolloportal
+    hostname: apollo-portal
+    container_name: apollo-portal
     volumes:
       - "/tmp/logs:/opt/logs"
     environment:

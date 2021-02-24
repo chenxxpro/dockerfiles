@@ -5,6 +5,7 @@ services:
     image: redis:6.0
     restart: always
     hostname: redis
+    container_name: redis
     volumes:
       - "/data/redis/data:/data"
     # 注意：如果改非standalone的集群部署模式，须外连访问其它服务，用Host网络

@@ -4,7 +4,8 @@ services:
   mqtt-broker:
     image: emqx/emqx:4.2.7
     restart: always
-    hostname: mqttbroker
+    hostname: mqtt
+    container_name: mqtt
     # 注意：如果改非standalone的集群部署模式，须外连访问其它服务，用Host网络
     # network_mode: "host"
     ports:

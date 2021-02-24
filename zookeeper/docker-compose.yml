@@ -5,6 +5,7 @@ services:
     image: zookeeper:3.4
     restart: always
     hostname: zookeeper
+    container_name: zookeeper
     volumes:
       - "/data/zookeeper/data:/data"
       - "/data/zookeeper/datalog:/datalog"
