@@ -6,6 +6,8 @@ services:
   netdata:
     image: netdata/netdata
     restart: always
+    hostname: netdata
+    container_name: netdata
     volumes:
       - "/proc:/host/proc:ro"
       - "/sys:/host/sys:ro"
@@ -22,6 +24,8 @@ services:
     image: portainer/portainer
     command: -H unix:///var/run/docker.sock
     restart: always
+    hostname: portainer
+    container_name: portainer
     ports:
       - 9000:9000
       - 8000:8000
