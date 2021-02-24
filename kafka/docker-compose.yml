@@ -3,20 +3,14 @@ services:
   kafka:
     #使用公版镜像
     image: wurstmeister/kafka:2.12-2.3.1
-    network_mode: host
     restart: always
-    ports:
-      - "9092:9092"
-    ulimits:
-      nofile:
-        soft: 848576
-        hard: 848576
+    # 通过宿主机访问ZK
+    network_mode: host
+    # ports:
+    #   - "9092:9092"
     environment:
-      BROKER_ID_COMMAND: "hostname | awk -F'-' '{print $$2}'"
-      HOSTNAME_COMMAND: "route -n | awk '/UG[ \t]/{print $$2}'"
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://9092
-      KAFKA_HEAP_OPTS: -Xmx2g -Xms2g -XX:MetaspaceSize=196m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /data/kafka/logs:/opt/kafka/logs
-      - /data/kafka/data:/kafka/kafka-logs-zhdc-sh-dpt
+      KAFKA_BROKER_ID: 1
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9092
+      KAFKA_HEAP_OPTS: -Xms128M -Xmx256M -XX:MetaspaceSize=196m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80
+      KAFKA_ZOOKEEPER_CONNECT: localhost:2181
