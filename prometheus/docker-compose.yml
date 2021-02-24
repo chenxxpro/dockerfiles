@@ -1,0 +1,7 @@
+version: '3.1'
+services:
+  kafka:
+    image: prom/prometheus
+    restart: always
+    ports:
+      - "9090:9090"
