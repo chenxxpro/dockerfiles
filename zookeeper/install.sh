@@ -1,9 +1,9 @@
 #!/bin/bash
 
-mkdir -p /data/zookeeper/data
-mkdir -p /data/zookeeper/datalog
-mkdir -p /data/zookeeper/log
+sudo mkdir -p /data/zookeeper/data
+sudo mkdir -p /data/zookeeper/datalog
+sudo mkdir -p /data/zookeeper/log
 
-# 启动Zookeeper服务
+# 启动服务
 docker-compose up -d
 
