@@ -1,0 +1,36 @@
+# cluster.name: Tuya_Logs_Cluster_Four
+# node.name: area-4-node-060
+node.attr.zone: zone-4-1
+node.attr.area: area-4
+## todo false可以配置
+node.master: true
+node.data: true
+node.ingest: true
+
+path.data: /home/docker/data/data
+path.logs: /home/docker/logs
+
+network.host: 0.0.0.0
+# 在外面配置
+# network.publish_host: 10.102.0.74
+# http.port: 9210
+
+# discovery.zen.ping.unicast.hosts: ["10.102.0.73","10.102.0.74","10.102.0.75"]
+
+#discovery.zen.minimum_master_nodes: 2
+#indices.breaker.total.limit: 70%
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+thread_pool.write.queue_size: 2000
+thread_pool.search.queue_size: 500
+#discovery.seed_hosts: [172.30.4.140, 172.30.4.55, 172.30.5.131, 172.30.5.60, 172.30.4.74, 172.30.5.96]
+# cluster.initial_master_nodes:
+# - 172.30.4.140
+# - 172.30.4.55
+# - 172.30.5.131
+
+indices.breaker.total.use_real_memory: false
+indices.breaker.total.limit: 70%
+indices.fielddata.cache.size: 40%

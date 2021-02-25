@@ -1,0 +1,42 @@
+version: "2"
+services:
+  elasticsearch:
+    image: elasticsearch:6.8.5
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - discovery.type=single-node 
+      - node.name=elasticsearch
+      - cluster.name=es-data-cluster
+      - network.publish_host=127.0.0.1
+      - http.port=9210
+      - bootstrap.memory_lock=true
+      - path.data=/usr/share/elasticsearch/data/data1,/usr/share/elasticsearch/data/data2
+      - path.logs=/usr/share/elasticsearch/logs
+    ulimits: 
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    volumes:
+      - /data/elasticsearch/data:/usr/share/elasticsearch/data/data 
+      - /data/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+      - /data/elasticsearch/work:/usr/share/elasticsearch/work
+      - /data/elasticsearch/logs:/usr/share/elasticsearch/logs
+      - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./config/jvm.options:/usr/share/elasticsearch/config/jvm.options
+      - ./config/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties
+    ports:
+      - 9210:9210
+      - 9300:9300
+    
+  elasticsearch-head:
+    image: docker.io/mobz/elasticsearch-head:5
+    container_name: elasticsearch-head
+    ports:
+      - 9100:9100
+    links:
+      - elasticsearch
+      
